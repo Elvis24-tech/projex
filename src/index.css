@@ -1,337 +1,202 @@
-/* ==========================================================================
-   1. GLOBAL STYLES & THEME VARIABLES
-   ========================================================================== */
+/* General reset and base styling */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff; /* White background */
+  color: #333;
+}
 
-   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-   :root {
-     --primary-blue: #0a74da;
-     --secondary-green: #2ecc71;
-     --danger-red: #e74c3c; /* <-- NEW RED VARIABLE */
-     --light-green: #e8f9f0;
-     --dark-text: #2c3e50;
-     --light-text: #ecf0f1;
-     --bg-color: #f4f7fa;
-     --card-bg-color: rgba(255, 255, 255, 0.6);
-     --border-color: #e0e6ed;
-     --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
-   }
-   
-   * {
-     box-sizing: border-box;
-     margin: 0;
-     padding: 0;
-   }
-   
-   body {
-     font-family: 'Poppins', sans-serif;
-     background-color: var(--bg-color);
-     background-image:
-       radial-gradient(circle at 10% 20%, rgba(10, 116, 218, 0.1), transparent 50%),
-       radial-gradient(circle at 80% 90%, rgba(46, 204, 113, 0.1), transparent 50%);
-     color: var(--dark-text);
-     line-height: 1.6;
-   }
-   
-   h1, h2, h3 {
-     font-weight: 600;
-     color: var(--primary-blue);
-   }
-   
-   /* ==========================================================================
-      2. APP & LAYOUT STYLES
-      ========================================================================== */
-   .main-content {
-     padding: 2rem 5%;
-   }
-   
-   .dashboard-card {
-     max-width: 800px;
-     margin: 0 auto;
-     padding: 2rem;
-     background-color: var(--card-bg-color);
-     backdrop-filter: blur(20px);
-     -webkit-backdrop-filter: blur(20px);
-     border-radius: 20px;
-     border: 1px solid rgba(255, 255, 255, 0.2);
-     box-shadow: var(--shadow);
-   }
-   
-   .card-header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     margin-bottom: 2rem;
-     flex-wrap: wrap;
-     gap: 1rem;
-   }
-   
-   .card-header h2 {
-     margin: 0;
-     font-size: 2rem;
-   }
-   
-   /* NEW: Footer for action buttons */
-   .card-footer {
-     margin-top: 2rem;
-     padding-top: 1rem;
-     border-top: 1px solid var(--border-color);
-     display: flex;
-     justify-content: flex-end;
-   }
-   
-   /* NEW: Reusable danger button style */
-   .btn-danger {
-     background-color: var(--danger-red);
-     color: white;
-     border: none;
-     padding: 0.6rem 1.2rem;
-     border-radius: 20px;
-     font-weight: 600;
-     cursor: pointer;
-     transition: all 0.3s ease;
-   }
-   .btn-danger:hover {
-     background-color: #c0392b;
-     transform: translateY(-2px);
-     box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-   }
-   
-   .progress-tracker {
-     display: flex;
-     flex-direction: column;
-     align-items: flex-end;
-   }
-   
-   .progress-tracker span {
-     font-size: 0.9rem;
-     color: var(--dark-text);
-     margin-bottom: 0.25rem;
-   }
-   
-   .progress-tracker progress {
-     -webkit-appearance: none;
-     appearance: none;
-     width: 150px;
-     height: 8px;
-     border-radius: 5px;
-     overflow: hidden;
-     border: 1px solid var(--border-color);
-   }
-   
-   .progress-tracker progress::-webkit-progress-bar {
-     background-color: #eee;
-   }
-   
-   .progress-tracker progress::-webkit-progress-value {
-     background-color: var(--secondary-green);
-     transition: width 0.5s ease;
-   }
-   .progress-tracker progress::-moz-progress-bar {
-     background-color: var(--secondary-green);
-   }
-   
-   /* ==========================================================================
-      3. HEADER COMPONENT STYLES
-      ========================================================================== */
-   .app-header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 1rem 5%;
-     background-color: var(--card-bg-color);
-     backdrop-filter: blur(10px);
-     -webkit-backdrop-filter: blur(10px);
-     border-bottom: 1px solid var(--border-color);
-     box-shadow: var(--shadow);
-     position: sticky;
-     top: 0;
-     z-index: 1000;
-   }
-   
-   .logo {
-     display: flex;
-     align-items: center;
-     gap: 0.5rem;
-     text-decoration: none; /* Remove underline from Link */
-   }
-   
-   .logo-icon {
-     font-size: 2rem;
-     color: var(--primary-blue);
-   }
-   
-   .logo h1 {
-     font-size: 1.8rem;
-     font-weight: 700;
-   }
-   
-   .app-header nav {
-     display: flex;
-     align-items: center;
-     gap: 1.5rem;
-   }
-   
-   .app-header nav a {
-     text-decoration: none;
-     color: var(--dark-text);
-     font-weight: 400;
-     padding-bottom: 5px;
-     border-bottom: 2px solid transparent;
-     transition: all 0.3s ease;
-   }
-   
-   /* UPDATED: Active link style */
-   .app-header nav a:hover,
-   .app-header nav a.active {
-     color: var(--primary-blue);
-     border-bottom-color: var(--primary-blue);
-   }
-   
-   .app-header nav a.button {
-     background-color: var(--primary-blue);
-     color: var(--light-text);
-     padding: 0.5rem 1rem;
-     border-radius: 20px;
-     border-bottom: none;
-   }
-   
-   /* UPDATED: Active state for button link */
-   .app-header nav a.button.active {
-       box-shadow: 0 0 0 3px rgba(10, 116, 218, 0.3);
-       border-bottom: none; /* Override default active style */
-   }
-   
-   .app-header nav a.button:hover {
-     transform: translateY(-2px);
-     box-shadow: 0 4px 15px rgba(10, 116, 218, 0.4);
-   }
-   
-   /* ==========================================================================
-      4. ADD TASK FORM COMPONENT STYLES
-      ========================================================================== */
-   .add-task-form {
-     display: flex;
-     margin-bottom: 2rem;
-   }
-   
-   .add-task-form input {
-     flex-grow: 1;
-     padding: 0.8rem 1rem;
-     border: 1px solid var(--border-color);
-     border-radius: 25px 0 0 25px;
-     font-size: 1rem;
-     outline: none;
-     transition: all 0.3s ease;
-   }
-   
-   .add-task-form input:focus {
-     border-color: var(--primary-blue);
-     box-shadow: 0 0 0 3px rgba(10, 116, 218, 0.2);
-   }
-   
-   .add-task-form button {
-     padding: 0.8rem 1.5rem;
-     border: none;
-     background-color: var(--primary-blue);
-     color: white;
-     border-radius: 0 25px 25px 0;
-     font-size: 1.5rem;
-     cursor: pointer;
-     transition: background-color 0.3s ease;
-   }
-   
-   .add-task-form button:hover {
-     background-color: #085aab;
-   }
-   
-   /* ==========================================================================
-      5. TASK LIST & TASK ITEM COMPONENT STYLES
-      ========================================================================== */
-   .task-list {
-     list-style-type: none;
-   }
-   
-   .no-tasks-message {
-     text-align: center;
-     padding: 2rem;
-     color: #7f8c8d;
-     background-color: #fff;
-     border-radius: 8px;
-   }
-   
-   .task-item {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     background-color: #fff;
-     padding: 1rem;
-     margin-bottom: 0.5rem;
-     border-radius: 8px;
-     border-left: 5px solid var(--primary-blue);
-     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-     transition: all 0.3s ease;
-   }
-   
-   .task-item:hover {
-     transform: translateX(5px);
-     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-   }
-   
-   .task-content {
-     display: flex;
-     align-items: center;
-     gap: 1rem;
-     cursor: pointer;
-     flex-grow: 1;
-     word-break: break-all; /* Prevents long text from overflowing */
-   }
-   
-   .checkbox {
-     min-width: 20px;
-     height: 20px;
-     border: 2px solid var(--border-color);
-     border-radius: 50%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     transition: all 0.3s ease;
-   }
-   
-   .delete-btn {
-     background: none;
-     border: none;
-     color: #95a5a6;
-     font-size: 1rem;
-     cursor: pointer;
-     padding: 5px;
-     border-radius: 50%;
-     transition: all 0.3s ease;
-   }
-   
-   .delete-btn:hover {
-     color: var(--danger-red); /* <-- USE RED VARIABLE */
-     background-color: #fce8e6;
-   }
-   
-   .task-item.completed {
-     border-left-color: var(--secondary-green);
-     background-color: var(--light-green);
-   }
-   
-   .task-item.completed .task-content p {
-     text-decoration: line-through;
-     color: #7f8c8d;
-   }
-   
-   .task-item.completed .checkbox {
-     background-color: var(--secondary-green);
-     border-color: var(--secondary-green);
-   }
-   
-   .task-item.completed .checkbox::after {
-     content: '✔';
-     color: white;
-     font-size: 12px;
-     font-weight: bold;
-   }
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007BFF; /* Blue */
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+}
+
+nav a {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #0056b3; /* Darker blue */
+}
+
+/* Main layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f7f9fc;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: #dc3545; /* Red */
+}
+
+.progress-tracker {
+  text-align: right;
+  color: #28a745; /* Green */
+}
+
+progress {
+  width: 150px;
+  height: 10px;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #28a745; /* Green */
+  border-radius: 5px;
+}
+
+/* Add Task Form */
+.add-task-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-task-form input {
+  flex: 1;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.add-task-form button {
+  padding: 0.7rem 1rem;
+  background-color: #007BFF; /* Blue */
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.add-task-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Task List */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+}
+
+.task-item:hover {
+  background-color: #f1f1f1;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.task-item.completed p {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.task-content .checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #28a745;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.task-item.completed .checkbox {
+  background-color: #28a745; /* Green */
+}
+
+.task-content p {
+  margin: 0;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #dc3545; /* Red */
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.delete-btn:hover {
+  color: #a71d2a;
+}
+
+/* No Tasks Message */
+.no-tasks-message {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  margin-top: 1rem;
+}

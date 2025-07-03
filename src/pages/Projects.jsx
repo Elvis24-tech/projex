@@ -2,9 +2,9 @@ import React from 'react';
 
 function Projects() {
   return (
-    <div className="dashboard-card">
+    <div>
       <h2>Projects</h2>
-      <p>This is where your different project boards will live. Coming soon!</p>
+      <p>List of all your projects.</p>
     </div>
   );
 }
